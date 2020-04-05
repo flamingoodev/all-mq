@@ -1,7 +1,7 @@
-package io.rushb.allmq.ms.producer;
+package io.rushb.allmq.message.producer;
 
 
-import io.rushb.allmq.ms.message.Message;
+import io.rushb.allmq.message.message.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,12 +12,13 @@ import javax.jms.TextMessage;
 import java.io.IOException;
 
 /**
- * @author zxj<br>
- * 时间 2018/3/19 17:48
- * 说明 ...
+ * ActiveMQ生产者
+ *
+ * @author <a href="mailto:flamingodev@outlook.com">FLAMINGO</a>
+ * @since 2020/4/5 22:14
  */
 public class ActivemqProducer implements Producer {
-    public final static Logger LOG = LoggerFactory.getLogger(ActivemqProducer.class);
+    public final static Logger logger = LoggerFactory.getLogger(ActivemqProducer.class);
     private MessageProducer producer;
     private Session session;
 
@@ -32,13 +33,13 @@ public class ActivemqProducer implements Producer {
             TextMessage textMessage = session.createTextMessage(message.getData());
             producer.send(textMessage);
         } catch (JMSException e) {
-            LOG.error("send activemq message fail , " + e.getMessage());
+            logger.error("send activemq message fail , " + e.getMessage());
         }
     }
 
     @Override
     public void close() throws IOException {
-        if(producer != null){
+        if (producer != null) {
             try {
                 producer.close();
             } catch (JMSException e) {

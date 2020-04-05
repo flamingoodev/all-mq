@@ -1,9 +1,10 @@
-package io.rushb.allmq.ms.message;
+package io.rushb.allmq.message.message;
 
 /**
- * @author zxj<br>
- * 时间 2018/3/19 14:34
- * 说明 ...
+ * 消息
+ *
+ * @author <a href="mailto:flamingodev@outlook.com">FLAMINGO</a>
+ * @since 2020/4/5 22:14
  */
 public class Message {
 

@@ -1,11 +1,12 @@
-package io.rushb.allmq.ms.consumer.consumer;
+package io.rushb.allmq.message.consumer.consumer;
 
 
-import io.rushb.allmq.Configuration;
-import io.rushb.allmq.ms.consumer.listener.MessageListener;
-import io.rushb.allmq.ms.message.KeyValueMessage;
+import io.rushb.allmq.message.message.Configuration;
+import io.rushb.allmq.factory.MessageThreadFactory;
+import io.rushb.allmq.message.consumer.listener.MessageListener;
+import io.rushb.allmq.message.message.KeyValueMessage;
 import io.rushb.allmq.util.Asserts;
-import io.rushb.allmq.util.IOUtil;
+import io.rushb.allmq.util.IoUtil;
 import io.rushb.allmq.util.PropertiesUtil;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -18,12 +19,13 @@ import java.util.Arrays;
 import java.util.Properties;
 
 /**
- * @author zxj<br>
- * 时间 2018/3/19 14:50
- * 说明 ...
+ * kafka消费者
+ *
+ * @author <a href="mailto:flamingodev@outlook.com">FLAMINGO</a>
+ * @since 2020/4/5 22:14
  */
 public class KafkaConsumer implements Consumer {
-    public final static Logger LOG = LoggerFactory.getLogger(KafkaConsumer.class);
+    public final static Logger logger = LoggerFactory.getLogger(KafkaConsumer.class);
 
 
     private Configuration configuration;
@@ -51,14 +53,14 @@ public class KafkaConsumer implements Consumer {
 
         Properties properties = PropertiesUtil.convert(configuration);
 
-        consumer = new org.apache.kafka.clients.consumer.KafkaConsumer<String, String>(properties);
+        consumer = new org.apache.kafka.clients.consumer.KafkaConsumer<>(properties);
         consumer.subscribe(Arrays.asList(topic));
 
     }
 
     @Override
     public void close() throws IOException {
-        IOUtil.close(consumer);
+        IoUtil.close(consumer);
 
     }
 
@@ -67,7 +69,7 @@ public class KafkaConsumer implements Consumer {
         if (this.messageListener == null) {
             this.receive = true;
             this.messageListener = messageListener;
-            new Thread(new Receive()).start();
+            new MessageThreadFactory("MessageListener").newThread(new Receive()).start();
         }
         this.messageListener = messageListener;
     }

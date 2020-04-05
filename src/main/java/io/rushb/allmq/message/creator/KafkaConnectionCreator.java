@@ -1,15 +1,16 @@
-package io.rushb.allmq.ms.creator;
+package io.rushb.allmq.message.creator;
 
 
-import io.rushb.allmq.Configuration;
-import io.rushb.allmq.ms.connection.Connection;
-import io.rushb.allmq.ms.connection.KafkaConnection;
+import io.rushb.allmq.message.message.Configuration;
+import io.rushb.allmq.message.connection.Connection;
+import io.rushb.allmq.message.connection.KafkaConnection;
 import io.rushb.allmq.util.Asserts;
 
 /**
- * @author zxj<br>
- * 时间 2018/3/19 11:39
- * 说明 创建kafka的connection
+ * kafka连接创建
+ *
+ * @author <a href="mailto:flamingodev@outlook.com">FLAMINGO</a>
+ * @since 2020/4/5 22:14
  */
 public class KafkaConnectionCreator implements ConnectionCreator {
     private Configuration configuration;
@@ -22,7 +23,7 @@ public class KafkaConnectionCreator implements ConnectionCreator {
 
     @Override
     public Connection create() {
-        Asserts.notNull(configuration,"configuration is not set");
+        Asserts.notNull(configuration, "configuration is not set");
         return new KafkaConnection(this.configuration);
     }
 }

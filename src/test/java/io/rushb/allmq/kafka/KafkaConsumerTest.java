@@ -1,18 +1,19 @@
 package io.rushb.allmq.kafka;
 
 
-import io.rushb.allmq.AllMsConnectionFactory;
-import io.rushb.allmq.Configuration;
-import io.rushb.allmq.MQ;
-import io.rushb.allmq.ms.connection.Connection;
-import io.rushb.allmq.ms.consumer.consumer.Consumer;
-import io.rushb.allmq.ms.consumer.listener.MessageListener;
-import io.rushb.allmq.ms.message.Message;
+import io.rushb.allmq.factory.ConnectionFactory;
+import io.rushb.allmq.message.message.Configuration;
+import io.rushb.allmq.message.message.MQ;
+import io.rushb.allmq.message.connection.Connection;
+import io.rushb.allmq.message.consumer.consumer.Consumer;
+import io.rushb.allmq.message.consumer.listener.MessageListener;
+import io.rushb.allmq.message.message.Message;
 
 /**
- * @author zxj<br>
- * 时间 2018/3/19 16:25
- * 说明 ...
+ * kafka消费者测试类
+ *
+ * @author <a href="mailto:flamingodev@outlook.com">FLAMINGO</a>
+ * @since 2020/4/5 22:14
  */
 public class KafkaConsumerTest {
 
@@ -25,8 +26,8 @@ public class KafkaConsumerTest {
         configuration.add("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
         configuration.add("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 
-        AllMsConnectionFactory allMsConnectionFactory = new AllMsConnectionFactory(configuration, MQ.KAFKA);
-        Connection connection = allMsConnectionFactory.getConnection();
+        ConnectionFactory connectionFactory = new ConnectionFactory(configuration, MQ.KAFKA);
+        Connection connection = connectionFactory.getConnection();
         Consumer consumer = connection.createConsumer("test");
         consumer.setMessageListener(new MessageListener() {
             @Override

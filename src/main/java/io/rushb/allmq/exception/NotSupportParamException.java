@@ -1,9 +1,10 @@
 package io.rushb.allmq.exception;
 
 /**
- * @author zxj<br>
- * 时间 2018/3/19 17:32
- * 说明 ...
+ * 不支持参数异常
+ *
+ * @author <a href="mailto:flamingodev@outlook.com">FLAMINGO</a>
+ * @since 2020/4/5 22:14
  */
 public class NotSupportParamException extends RuntimeException {
 

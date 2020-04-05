@@ -1,9 +1,10 @@
-package io.rushb.allmq.ms.message;
+package io.rushb.allmq.message.message;
 
 /**
- * @author zxj<br>
- * 时间 2018/3/19 14:35
- * 说明 ...
+ * key value消息
+ *
+ * @author <a href="mailto:flamingodev@outlook.com">FLAMINGO</a>
+ * @since 2020/4/5 22:14
  */
 public final class KeyValueMessage extends Message {
     protected String key;

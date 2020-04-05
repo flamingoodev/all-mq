@@ -4,13 +4,14 @@ import java.io.Closeable;
 import java.io.IOException;
 
 /**
- * @author zxj<br>
- * 时间 2018/3/19 14:41
- * 说明 ...
+ * IO工具类
+ *
+ * @author <a href="mailto:flamingodev@outlook.com">FLAMINGO</a>
+ * @since 2020/4/5 22:14
  */
-public class IOUtil {
-    public static void close(Closeable closeable){
-        if(closeable != null){
+public class IoUtil {
+    public static void close(Closeable closeable) {
+        if (closeable != null) {
             try {
                 closeable.close();
             } catch (IOException e) {

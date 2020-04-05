@@ -1,7 +1,7 @@
-package io.rushb.allmq.ms.consumer.consumer;
+package io.rushb.allmq.message.consumer.consumer;
 
-import io.rushb.allmq.ms.consumer.listener.ActivemqMessageListener;
-import io.rushb.allmq.ms.consumer.listener.MessageListener;
+import io.rushb.allmq.message.consumer.listener.ActivemqMessageListener;
+import io.rushb.allmq.message.consumer.listener.MessageListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,12 +10,13 @@ import javax.jms.MessageConsumer;
 import java.io.IOException;
 
 /**
- * @author zxj<br>
- * 时间 2018/3/19 17:45
- * 说明 ...
+ * ActiveMQ消费者
+ *
+ * @author <a href="mailto:flamingodev@outlook.com">FLAMINGO</a>
+ * @since 2020/4/5 22:14
  */
 public class ActivemqConsumer implements Consumer {
-    public final static Logger LOG = LoggerFactory.getLogger(ActivemqConsumer.class);
+    public final static Logger logger = LoggerFactory.getLogger(ActivemqConsumer.class);
     private MessageConsumer consumer;
 
 
@@ -28,13 +29,13 @@ public class ActivemqConsumer implements Consumer {
         try {
             this.consumer.setMessageListener(new ActivemqMessageListener(messageListener));
         } catch (JMSException e) {
-            LOG.error("set message listener fail", e);
+            logger.error("set message listener fail", e);
         }
     }
 
     @Override
     public void close() throws IOException {
-        if(consumer != null){
+        if (consumer != null) {
             try {
                 consumer.close();
             } catch (JMSException e) {

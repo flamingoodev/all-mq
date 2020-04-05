@@ -1,21 +1,22 @@
-package io.rushb.allmq.ms.connection;
+package io.rushb.allmq.message.connection;
 
-import io.rushb.allmq.Configuration;
+import io.rushb.allmq.message.message.Configuration;
 import io.rushb.allmq.exception.CreateConnectionFailException;
 import io.rushb.allmq.exception.NotSupportParamException;
-import io.rushb.allmq.ms.consumer.consumer.ActivemqConsumer;
-import io.rushb.allmq.ms.consumer.consumer.Consumer;
-import io.rushb.allmq.ms.producer.ActivemqProducer;
-import io.rushb.allmq.ms.producer.Producer;
+import io.rushb.allmq.message.consumer.consumer.ActivemqConsumer;
+import io.rushb.allmq.message.consumer.consumer.Consumer;
+import io.rushb.allmq.message.producer.ActivemqProducer;
+import io.rushb.allmq.message.producer.Producer;
 import org.apache.activemq.command.ActiveMQQueue;
 import org.apache.activemq.command.ActiveMQTopic;
 
 import javax.jms.*;
 
 /**
- * @author zxj<br>
- * 时间 2018/3/19 17:15
- * 说明 ...
+ * ActiveMQ连接
+ *
+ * @author <a href="mailto:flamingodev@outlook.com">FLAMINGO</a>
+ * @since 2020/4/5 22:14
  */
 public class ActivemqConnection implements Connection {
     public static final String TRANSACTION_NAME = "transaction";
@@ -32,7 +33,7 @@ public class ActivemqConnection implements Connection {
      */
     private int type = 0;
 
-    public ActivemqConnection(Configuration configuration,javax.jms.Connection connection) {
+    public ActivemqConnection(Configuration configuration, javax.jms.Connection connection) {
         this.configuration = configuration;
         this.connection = connection;
 
@@ -40,54 +41,53 @@ public class ActivemqConnection implements Connection {
     }
 
     private void init() {
-        //transaction
+        // transaction
         boolean transaction = false;
-        Object transaction_ = configuration.get(TRANSACTION_NAME);
-        if(transaction_ != null){
-            if("true".equals(transaction_)){
+        Object transactionName = configuration.get(TRANSACTION_NAME);
+        if (transactionName != null) {
+            if (Boolean.toString(true).equals(transactionName)) {
                 transaction = true;
-            }else if("false".equals(transaction_)){
+            } else if (Boolean.toString(false).equals(transactionName)) {
                 transaction = false;
-            }else{
-                throw new NotSupportParamException("the value of " +TRANSACTION_NAME + " can not be " + transaction_);
+            } else {
+                throw new NotSupportParamException("the value of " + TRANSACTION_NAME + " can not be " + transactionName);
             }
-
         }
 
-        //auto mode
+        // auto mode
         int mode = 1;
         Object o = configuration.get(acknowledgeMode_name);
-        if(o != null){
+        if (o != null) {
             o = String.valueOf(o);
             try {
                 mode = Integer.parseInt(String.valueOf(o));
             } catch (NumberFormatException e) {
                 throw new NumberFormatException("the " + acknowledgeMode_name + " config just only support number");
             }
-        }else{
+        } else {
             mode = 1;
         }
 
-        //queue or topic
-        Object to=  configuration.get(TYPE_NAME);
-        if(to != null){
+        // queue or topic
+        Object to = configuration.get(TYPE_NAME);
+        if (to != null) {
             this.type = Integer.parseInt(String.valueOf(to));
-            if(this.type != 0 && this.type != 1){
-                throw new NotSupportParamException("the value of " +TYPE_NAME + " can not be " + to);
+            if (this.type != 0 && this.type != 1) {
+                throw new NotSupportParamException("the value of " + TYPE_NAME + " can not be " + to);
             }
-        }else{
+        } else {
             this.type = 0;
         }
 
         try {
             this.session = this.connection.createSession(transaction, mode);
         } catch (JMSException e) {
-            throw new CreateConnectionFailException("create session fail" , e);
+            throw new CreateConnectionFailException("create session fail", e);
         }
     }
 
     @Override
-    public Consumer createConsumer(String topicName)throws CreateConnectionFailException {
+    public Consumer createConsumer(String topicName) throws CreateConnectionFailException {
         Destination destination = createDestination(topicName);
         try {
             MessageConsumer consumer = session.createConsumer(destination);
@@ -100,20 +100,20 @@ public class ActivemqConnection implements Connection {
     }
 
     @Override
-    public Producer createProducer(String topicName) throws CreateConnectionFailException{
+    public Producer createProducer(String topicName) throws CreateConnectionFailException {
         Destination destination = createDestination(topicName);
         try {
             MessageProducer producer = session.createProducer(destination);
-            return new ActivemqProducer(producer,session);
+            return new ActivemqProducer(producer, session);
         } catch (JMSException e) {
             throw new CreateConnectionFailException("create activemq producer fail", e);
         }
     }
 
-    protected Destination createDestination(String topic){
-        if(type == 0){
+    protected Destination createDestination(String topic) {
+        if (type == 0) {
             return new ActiveMQQueue(topic);
-        }else{
+        } else {
             return new ActiveMQTopic(topic);
         }
     }

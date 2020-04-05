@@ -1,32 +1,36 @@
-package io.rushb.allmq;
+package io.rushb.allmq.factory;
 
 
-import com.sun.istack.internal.NotNull;
+import io.rushb.allmq.message.creator.AllConnectionCreator;
+import io.rushb.allmq.message.message.Configuration;
+import io.rushb.allmq.message.message.MQ;
+import io.rushb.allmq.constants.Constant;
 import io.rushb.allmq.exception.NotSupportParamException;
-import io.rushb.allmq.ms.connection.Connection;
-import io.rushb.allmq.ms.creator.ConnectionCreator;
+import io.rushb.allmq.message.connection.Connection;
+import io.rushb.allmq.message.creator.ConnectionCreator;
 import io.rushb.allmq.util.Asserts;
 
 /**
- * @author zxj<br>
- * 时间 2018/3/19 11:16
- * 说明 ...
+ * 连接工厂类
+ *
+ * @author <a href="mailto:flamingodev@outlook.com">FLAMINGO</a>
+ * @since 2020/4/5 22:14
  */
-public class AllMsConnectionFactory {
+public class ConnectionFactory {
     public static final String MQ_NAME = "mq";
     private Configuration configuration;
     private MQ mq;
 
-    public AllMsConnectionFactory(@NotNull Configuration configuration) {
+    public ConnectionFactory(Configuration configuration) {
         Asserts.notNull(configuration, "configuration can not be null");
         Object omq = configuration.get(MQ_NAME);
         if (omq == null) {
             throw new NotSupportParamException("you should set 'mq' to the configuration on this constructor , or use an other constructor ");
         }
         String mq = String.valueOf(omq);
-        if ("kafka".equalsIgnoreCase(mq)) {
+        if (Constant.KAFKA.equalsIgnoreCase(mq)) {
             this.mq = MQ.KAFKA;
-        } else if ("activemq".equalsIgnoreCase(mq)) {
+        } else if (Constant.ACTIVE_MQ.equalsIgnoreCase(mq)) {
             this.mq = MQ.ACTIVEMQ;
         } else {
             throw new NotSupportParamException("the mq config can not be " + mq);
@@ -35,7 +39,7 @@ public class AllMsConnectionFactory {
         this.configuration = configuration;
     }
 
-    public AllMsConnectionFactory(Configuration configuration, MQ mq) {
+    public ConnectionFactory(Configuration configuration, MQ mq) {
         Asserts.notNull(configuration, "configuration can not be null");
         Asserts.notNull(mq, "mq can not be null");
         this.configuration = configuration;
@@ -44,9 +48,8 @@ public class AllMsConnectionFactory {
 
 
     public Connection getConnection() {
-        ConnectionCreator connectionCreator = AllMsLib.getConnectionCreator(mq);
+        ConnectionCreator connectionCreator = AllConnectionCreator.getConnectionCreator(mq);
         connectionCreator.setConfiguration(configuration);
-        Connection connection = connectionCreator.create();
-        return connection;
+        return connectionCreator.create();
     }
 }

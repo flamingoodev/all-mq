@@ -1,26 +1,23 @@
 package io.rushb.allmq.util;
 
 
+import io.rushb.allmq.message.message.Configuration;
 
-import io.rushb.allmq.Configuration;
-
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
 /**
- * @author zxj<br>
- * 时间 2018/3/19 15:17
- * 说明 ...
+ * 配置工具类
+ *
+ * @author <a href="mailto:flamingodev@outlook.com">FLAMINGO</a>
+ * @since 2020/4/5 22:14
  */
 public class PropertiesUtil {
 
-    public static Properties convert(Configuration configuration){
+    public static Properties convert(Configuration configuration) {
         Properties properties = new Properties();
-        Iterator<Map.Entry<String, Object>> iterator = configuration.entrySet().iterator();
-        while (iterator.hasNext()){
-            Map.Entry<String, Object> entry = iterator.next();
-            properties.put(entry.getKey(),entry.getValue());
+        for (Map.Entry<String, Object> entry : configuration.entrySet()) {
+            properties.put(entry.getKey(), entry.getValue());
         }
         return properties;
     }
