@@ -2,12 +2,15 @@ package io.rushb.allmq.activemq;
 
 
 import io.rushb.allmq.factory.ConnectionFactory;
-import io.rushb.allmq.message.message.Configuration;
-import io.rushb.allmq.message.message.MQ;
+import io.rushb.allmq.message.configuration.ConnectionConfiguration;
 import io.rushb.allmq.message.connection.Connection;
 import io.rushb.allmq.message.consumer.consumer.Consumer;
 import io.rushb.allmq.message.consumer.listener.MessageListener;
+import io.rushb.allmq.message.message.Configuration;
+import io.rushb.allmq.message.message.MQ;
 import io.rushb.allmq.message.message.Message;
+import io.rushb.allmq.util.MessageUtil;
+import org.junit.jupiter.api.Test;
 
 /**
  * ActiveMQ消费者测试类
@@ -31,5 +34,17 @@ public class ActivemqConsumerTest {
                 System.out.println(message);
             }
         });
+    }
+
+    @Test
+    public void test() {
+        Configuration configuration = new Configuration();
+        configuration.add("mq", MQ.ACTIVEMQ);
+        configuration.add("username", "admin");
+        configuration.add("password", "admin");
+        configuration.add("brokerURL", "failover:(tcp://116.62.150.178:61616)");
+        ConnectionConfiguration connectionConfiguration = new ConnectionConfiguration();
+        connectionConfiguration.setConfiguration(configuration);
+        MessageUtil.send("test1", new Message("This is a test message"));
     }
 }

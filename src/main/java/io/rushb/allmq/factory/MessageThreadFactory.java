@@ -18,7 +18,7 @@ public class MessageThreadFactory implements ThreadFactory {
     private final AtomicInteger nextId = new AtomicInteger(1);
 
     public MessageThreadFactory(String whatFeatureOfGroup) {
-        this.namePrefix = "From MessageThreadFactory's" + whatFeatureOfGroup + "-Worker-";
+        this.namePrefix = "From MessageThreadFactory's " + whatFeatureOfGroup + "-Worker-";
     }
 
     @Override

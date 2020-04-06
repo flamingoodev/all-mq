@@ -25,10 +25,11 @@ import java.util.Properties;
  * @since 2020/4/5 22:14
  */
 public class KafkaConsumer implements Consumer {
+
     public final static Logger logger = LoggerFactory.getLogger(KafkaConsumer.class);
 
-
     private Configuration configuration;
+
     private String topic;
 
     private org.apache.kafka.clients.consumer.Consumer<String, String> consumer;
@@ -49,10 +50,7 @@ public class KafkaConsumer implements Consumer {
     }
 
     private void init() {
-
-
         Properties properties = PropertiesUtil.convert(configuration);
-
         consumer = new org.apache.kafka.clients.consumer.KafkaConsumer<>(properties);
         consumer.subscribe(Arrays.asList(topic));
 
@@ -61,7 +59,6 @@ public class KafkaConsumer implements Consumer {
     @Override
     public void close() throws IOException {
         IoUtil.close(consumer);
-
     }
 
     @Override
