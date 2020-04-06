@@ -17,9 +17,13 @@ import io.rushb.allmq.util.Asserts;
  * @since 2020/4/5 22:14
  */
 public class ConnectionFactory {
+    private static ConnectionFactory instance;
     public static final String MQ_NAME = "mq";
     private Configuration configuration;
     private MQ mq;
+
+    private ConnectionFactory() {
+    }
 
     public ConnectionFactory(Configuration configuration) {
         Asserts.notNull(configuration, "configuration can not be null");
@@ -46,6 +50,12 @@ public class ConnectionFactory {
         this.mq = mq;
     }
 
+    public static ConnectionFactory getInstance() {
+        if (instance == null) {
+            instance = new ConnectionFactory();
+        }
+        return instance;
+    }
 
     public Connection getConnection() {
         ConnectionCreator connectionCreator = AllConnectionCreator.getConnectionCreator(mq);
