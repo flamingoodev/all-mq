@@ -1,9 +1,9 @@
 package io.rushb.allmq.message.consumer.consumer;
 
 
-import io.rushb.allmq.message.message.Configuration;
 import io.rushb.allmq.factory.MessageThreadFactory;
 import io.rushb.allmq.message.consumer.listener.MessageListener;
+import io.rushb.allmq.message.message.Configuration;
 import io.rushb.allmq.message.message.KeyValueMessage;
 import io.rushb.allmq.util.Asserts;
 import io.rushb.allmq.util.IoUtil;

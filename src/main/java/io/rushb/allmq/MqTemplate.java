@@ -4,6 +4,7 @@ import io.rushb.allmq.factory.ConnectionFactory;
 import io.rushb.allmq.message.connection.Connection;
 import io.rushb.allmq.message.consumer.consumer.Consumer;
 import io.rushb.allmq.message.consumer.consumer.KafkaConsumer;
+import io.rushb.allmq.message.consumer.listener.MessageListener;
 import io.rushb.allmq.message.message.Message;
 import io.rushb.allmq.message.producer.Producer;
 import io.rushb.allmq.util.Asserts;
@@ -17,6 +18,7 @@ import org.slf4j.LoggerFactory;
  * @since 2020/4/6 23:37
  */
 public class MqTemplate {
+
     public final static Logger logger = LoggerFactory.getLogger(KafkaConsumer.class);
 
     /**
@@ -50,7 +52,12 @@ public class MqTemplate {
         message = null;
         Connection connection = ConnectionFactory.getInstance().getConnection();
         Consumer consumer = connection.createConsumer(topic);
-        consumer.setMessageListener(message -> MqTemplate.message = message);
+        consumer.setMessageListener(new MessageListener() {
+            @Override
+            public void onMessage(Message msg) {
+                message = msg;
+            }
+        });
         return message;
     }
 }
