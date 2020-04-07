@@ -1,12 +1,12 @@
 package io.rushb.allmq;
 
-import com.sun.istack.internal.NotNull;
 import io.rushb.allmq.factory.ConnectionFactory;
 import io.rushb.allmq.message.connection.Connection;
 import io.rushb.allmq.message.consumer.consumer.Consumer;
 import io.rushb.allmq.message.consumer.consumer.KafkaConsumer;
 import io.rushb.allmq.message.message.Message;
 import io.rushb.allmq.message.producer.Producer;
+import io.rushb.allmq.util.Asserts;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,7 +30,9 @@ public class MqTemplate {
      * @param topic   topic
      * @param message message
      */
-    public static void send(@NotNull String topic, @NotNull Message message) {
+    public static void send(String topic, Message message) {
+        Asserts.notNull(topic, "topic can not be null");
+        Asserts.notNull(message, "message can not be null");
         Connection connection = ConnectionFactory.getInstance().getConnection();
         Producer producer = connection.createProducer(topic);
         producer.sendMessage(message);
@@ -43,7 +45,8 @@ public class MqTemplate {
      * @param topic topic
      * @return message
      */
-    public static Message listen(@NotNull String topic) {
+    public static Message listen(String topic) {
+        Asserts.notNull(topic, "topic can not be null");
         message = null;
         Connection connection = ConnectionFactory.getInstance().getConnection();
         Consumer consumer = connection.createConsumer(topic);

@@ -10,7 +10,9 @@ import java.util.HashMap;
  */
 public class Configuration extends HashMap<String, Object> {
 
-    public void add(String key, Object value) {
-        this.put(key, value);
+    private static final long serialVersionUID = -7171471395590154318L;
+
+    public void add(String key, Object object) {
+        this.put(key, object);
     }
 }

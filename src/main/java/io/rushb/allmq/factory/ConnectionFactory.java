@@ -21,9 +21,12 @@ public class ConnectionFactory {
     private static Configuration configuration;
     private MQ mq;
 
+    private ConnectionFactory() {
+    }
+
     private ConnectionFactory(Configuration config) {
-        Asserts.notNull(configuration, "configuration not be null , you should call [ConnectionFactory.build()] first");
-        Object omq = configuration.get(MQ_NAME);
+        Asserts.notNull(config, "configuration not be null , you should call [ConnectionFactory.build()] first");
+        Object omq = config.get(MQ_NAME);
         Asserts.notNull(omq, "mq can not be null");
         String mq = String.valueOf(omq);
         if (Constant.KAFKA.equalsIgnoreCase(mq)) {
@@ -34,6 +37,7 @@ public class ConnectionFactory {
             throw new NotSupportParamException("the mq config can not be " + mq);
         }
         configuration = config;
+        new ConnectionFactory();
     }
 
     public static void build(Configuration configuration) {
