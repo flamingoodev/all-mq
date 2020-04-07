@@ -10,9 +10,10 @@ import io.rushb.allmq.message.message.Message;
  * @since 2020/4/5 22:14
  */
 public interface MessageListener {
-
-
+    /**
+     * onMessage
+     *
+     * @param message message
+     */
     void onMessage(Message message);
-
-
 }

@@ -18,8 +18,11 @@ import java.io.IOException;
  * @since 2020/4/5 22:14
  */
 public class ActivemqProducer implements Producer {
+
     public final static Logger logger = LoggerFactory.getLogger(ActivemqProducer.class);
+
     private MessageProducer producer;
+
     private Session session;
 
     public ActivemqProducer(MessageProducer producer, Session session) {

@@ -1,8 +1,8 @@
 package io.rushb.allmq.message.connection;
 
-import io.rushb.allmq.message.message.Configuration;
 import io.rushb.allmq.message.consumer.consumer.Consumer;
 import io.rushb.allmq.message.consumer.consumer.KafkaConsumer;
+import io.rushb.allmq.message.message.Configuration;
 import io.rushb.allmq.message.producer.KafkaProducer;
 import io.rushb.allmq.message.producer.Producer;
 import io.rushb.allmq.util.Asserts;
@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
  * @since 2020/4/5 22:14
  */
 public class KafkaConnection implements Connection {
+
     public final static Logger logger = LoggerFactory.getLogger(KafkaConnection.class);
     /**
      * set kafka offset to auto commit
@@ -23,7 +24,6 @@ public class KafkaConnection implements Connection {
     public static final String AUTO_COMMIT_KEY = "enable.auto.commit";
 
     private Configuration configuration;
-
 
     public KafkaConnection(Configuration configuration) {
         this.validConfiguration(configuration);

@@ -13,8 +13,11 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @since 2020/4/5 23:06
  */
 public class MessageThreadFactory implements ThreadFactory {
+
     public final static Logger logger = LoggerFactory.getLogger(MessageThreadFactory.class);
+
     private final String namePrefix;
+
     private final AtomicInteger nextId = new AtomicInteger(1);
 
     public MessageThreadFactory(String whatFeatureOfGroup) {

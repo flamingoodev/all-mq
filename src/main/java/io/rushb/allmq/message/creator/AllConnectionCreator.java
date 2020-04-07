@@ -13,6 +13,7 @@ import java.util.Map;
  * @since 2020/4/5 22:14
  */
 public class AllConnectionCreator {
+
     private final static Map<MQ, ConnectionCreator> LIB = new HashMap<>();
 
     static {

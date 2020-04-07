@@ -13,5 +13,10 @@ import java.io.Closeable;
  */
 public interface Producer extends Closeable {
 
+    /**
+     * send message
+     *
+     * @param message message
+     */
     void sendMessage(Message message);
 }

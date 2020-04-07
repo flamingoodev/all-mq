@@ -8,6 +8,8 @@ package io.rushb.allmq.exception;
  */
 public class NotSupportParamException extends RuntimeException {
 
+    private static final long serialVersionUID = -6224870864040940424L;
+
     public NotSupportParamException() {
     }
 

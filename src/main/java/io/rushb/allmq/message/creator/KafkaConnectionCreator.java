@@ -1,9 +1,9 @@
 package io.rushb.allmq.message.creator;
 
 
-import io.rushb.allmq.message.message.Configuration;
 import io.rushb.allmq.message.connection.Connection;
 import io.rushb.allmq.message.connection.KafkaConnection;
+import io.rushb.allmq.message.message.Configuration;
 import io.rushb.allmq.util.Asserts;
 
 /**
@@ -13,8 +13,8 @@ import io.rushb.allmq.util.Asserts;
  * @since 2020/4/5 22:14
  */
 public class KafkaConnectionCreator implements ConnectionCreator {
-    private Configuration configuration;
 
+    private Configuration configuration;
 
     @Override
     public void setConfiguration(Configuration configuration) {

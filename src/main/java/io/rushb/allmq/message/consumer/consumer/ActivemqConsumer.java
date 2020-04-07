@@ -16,9 +16,10 @@ import java.io.IOException;
  * @since 2020/4/5 22:14
  */
 public class ActivemqConsumer implements Consumer {
-    public final static Logger logger = LoggerFactory.getLogger(ActivemqConsumer.class);
-    private MessageConsumer consumer;
 
+    public final static Logger logger = LoggerFactory.getLogger(ActivemqConsumer.class);
+
+    private MessageConsumer consumer;
 
     public ActivemqConsumer(MessageConsumer consumer) {
         this.consumer = consumer;

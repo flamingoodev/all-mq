@@ -8,6 +8,8 @@ package io.rushb.allmq.exception;
  */
 public class CreateConnectionFailException extends RuntimeException {
 
+    private static final long serialVersionUID = 8675066063755492175L;
+
     public CreateConnectionFailException() {
     }
 

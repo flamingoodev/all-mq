@@ -53,7 +53,6 @@ public class KafkaConsumer implements Consumer {
         Properties properties = PropertiesUtil.convert(configuration);
         consumer = new org.apache.kafka.clients.consumer.KafkaConsumer<>(properties);
         consumer.subscribe(Arrays.asList(topic));
-
     }
 
     @Override

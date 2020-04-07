@@ -1,9 +1,9 @@
 package io.rushb.allmq.message.creator;
 
 
-import io.rushb.allmq.message.message.Configuration;
 import io.rushb.allmq.exception.CreateConnectionFailException;
 import io.rushb.allmq.message.connection.Connection;
+import io.rushb.allmq.message.message.Configuration;
 
 /**
  * 连接创建类
@@ -13,7 +13,18 @@ import io.rushb.allmq.message.connection.Connection;
  */
 public interface ConnectionCreator {
 
+    /**
+     * set configuration
+     *
+     * @param configuration configuration
+     */
     void setConfiguration(Configuration configuration);
 
+    /**
+     * create connection
+     *
+     * @return Connection
+     * @throws CreateConnectionFailException e
+     */
     Connection create() throws CreateConnectionFailException;
 }

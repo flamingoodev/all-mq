@@ -12,21 +12,21 @@ import io.rushb.allmq.message.producer.Producer;
  * @since 2020/4/5 22:14
  */
 public interface Connection {
-
-
     /**
      * 创建consumer
      *
-     * @return
+     * @param topic topic
+     * @return Consumer
+     * @throws CreateConnectionFailException e
      */
     Consumer createConsumer(String topic) throws CreateConnectionFailException;
 
     /**
-     * 创建producer
+     * Producer
      *
-     * @return
+     * @param topic topic
+     * @return Producer
+     * @throws CreateConnectionFailException e
      */
     Producer createProducer(String topic) throws CreateConnectionFailException;
-
-
 }

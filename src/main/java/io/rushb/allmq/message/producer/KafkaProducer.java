@@ -42,12 +42,10 @@ public class KafkaProducer implements Producer {
         producer = new org.apache.kafka.clients.producer.KafkaProducer<String, String>(properties);
     }
 
-
     @Override
     public void close() throws IOException {
         IoUtil.close(producer);
     }
-
 
     /**
      * @param topic   send topic

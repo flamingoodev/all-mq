@@ -7,8 +7,8 @@ package io.rushb.allmq.message.message;
  * @since 2020/4/5 22:14
  */
 public final class KeyValueMessage extends Message {
-    protected String key;
 
+    protected String key;
 
     public KeyValueMessage(String key, String data) {
         this.key = key;

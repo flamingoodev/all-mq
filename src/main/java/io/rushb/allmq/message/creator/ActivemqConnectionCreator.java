@@ -17,9 +17,13 @@ import javax.jms.JMSException;
  * @since 2020/4/5 22:14
  */
 public class ActivemqConnectionCreator implements ConnectionCreator {
+
     private Configuration configuration;
+
     private String username;
+
     private String password;
+
     private String brokerUrl;
 
     @Override

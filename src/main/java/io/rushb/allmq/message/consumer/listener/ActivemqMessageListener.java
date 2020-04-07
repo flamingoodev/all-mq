@@ -15,6 +15,7 @@ import javax.jms.TextMessage;
  * @since 2020/4/5 22:14
  */
 public class ActivemqMessageListener implements MessageListener {
+
     public final static Logger logger = LoggerFactory.getLogger(ActivemqMessageListener.class);
 
     private io.rushb.allmq.message.consumer.listener.MessageListener messageListener;
@@ -37,6 +38,4 @@ public class ActivemqMessageListener implements MessageListener {
             logger.error("not support message type : " + message.getClass().getName());
         }
     }
-
-
 }

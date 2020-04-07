@@ -11,13 +11,10 @@ import java.io.Closeable;
  * @since 2020/4/5 22:14
  */
 public interface Consumer extends Closeable {
-
     /**
      * set a listener
      *
-     * @param messageListener
+     * @param messageListener messageListener
      */
     void setMessageListener(MessageListener messageListener);
-
-
 }

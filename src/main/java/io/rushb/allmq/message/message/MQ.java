@@ -11,9 +11,8 @@ public enum MQ {
      * ActiveMQ
      */
     ACTIVEMQ,
-
     /**
      * Kafka
      */
-    KAFKA,
+    KAFKA
 }

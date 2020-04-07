@@ -16,9 +16,13 @@ import io.rushb.allmq.util.Asserts;
  * @since 2020/4/5 22:14
  */
 public class ConnectionFactory {
+
     private volatile static ConnectionFactory instance;
+
     public static final String MQ_NAME = "mq";
+
     private static Configuration configuration;
+
     private MQ mq;
 
     private ConnectionFactory() {

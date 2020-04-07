@@ -1,10 +1,10 @@
 package io.rushb.allmq.message.connection;
 
-import io.rushb.allmq.message.message.Configuration;
 import io.rushb.allmq.exception.CreateConnectionFailException;
 import io.rushb.allmq.exception.NotSupportParamException;
 import io.rushb.allmq.message.consumer.consumer.ActivemqConsumer;
 import io.rushb.allmq.message.consumer.consumer.Consumer;
+import io.rushb.allmq.message.message.Configuration;
 import io.rushb.allmq.message.producer.ActivemqProducer;
 import io.rushb.allmq.message.producer.Producer;
 import org.apache.activemq.command.ActiveMQQueue;
@@ -19,12 +19,17 @@ import javax.jms.*;
  * @since 2020/4/5 22:14
  */
 public class ActivemqConnection implements Connection {
+
     public static final String TRANSACTION_NAME = "transaction";
-    public static final String acknowledgeMode_name = "acknowledgeMode";
+
+    public static final String AC_KNOWLEDGE_MODE_NAME = "acknowledgeMode";
+
     public static final String TYPE_NAME = "type";
 
     private Configuration configuration;
+
     private javax.jms.Connection connection;
+
     private Session session;
 
     /**
@@ -36,7 +41,6 @@ public class ActivemqConnection implements Connection {
     public ActivemqConnection(Configuration configuration, javax.jms.Connection connection) {
         this.configuration = configuration;
         this.connection = connection;
-
         init();
     }
 
@@ -53,21 +57,19 @@ public class ActivemqConnection implements Connection {
                 throw new NotSupportParamException("the value of " + TRANSACTION_NAME + " can not be " + transactionName);
             }
         }
-
         // auto mode
         int mode = 1;
-        Object o = configuration.get(acknowledgeMode_name);
+        Object o = configuration.get(AC_KNOWLEDGE_MODE_NAME);
         if (o != null) {
             o = String.valueOf(o);
             try {
                 mode = Integer.parseInt(String.valueOf(o));
             } catch (NumberFormatException e) {
-                throw new NumberFormatException("the " + acknowledgeMode_name + " config just only support number");
+                throw new NumberFormatException("the " + AC_KNOWLEDGE_MODE_NAME + " config just only support number");
             }
         } else {
             mode = 1;
         }
-
         // queue or topic
         Object to = configuration.get(TYPE_NAME);
         if (to != null) {
@@ -78,7 +80,6 @@ public class ActivemqConnection implements Connection {
         } else {
             this.type = 0;
         }
-
         try {
             this.session = this.connection.createSession(transaction, mode);
         } catch (JMSException e) {
@@ -91,9 +92,7 @@ public class ActivemqConnection implements Connection {
         Destination destination = createDestination(topicName);
         try {
             MessageConsumer consumer = session.createConsumer(destination);
-
             return new ActivemqConsumer(consumer);
-
         } catch (JMSException e) {
             throw new CreateConnectionFailException("create activemq consumer fail", e);
         }
