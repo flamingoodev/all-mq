@@ -42,8 +42,8 @@ public class KafkaConsumer implements Consumer {
     private boolean receive = false;
 
     public KafkaConsumer(Configuration configuration, String topic) {
-        Asserts.notNull(configuration, "configuration can not be null");
-        Asserts.notNull(topic, "topic can not be null");
+        Asserts.notNull(configuration, "Configuration can not be null");
+        Asserts.notNull(topic, "Topic can not be null");
         this.configuration = configuration;
         this.topic = topic;
         init();

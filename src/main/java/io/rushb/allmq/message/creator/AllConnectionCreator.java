@@ -35,7 +35,7 @@ public class AllConnectionCreator {
     public static ConnectionCreator getConnectionCreator(MQ mq) {
         ConnectionCreator connectionCreator = LIB.get(mq);
         if (connectionCreator == null) {
-            throw new NullPointerException("找不到" + mq + "对应的connectionCreator");
+            throw new NullPointerException("Can't find connection creator by " + mq);
         }
         return connectionCreator;
     }

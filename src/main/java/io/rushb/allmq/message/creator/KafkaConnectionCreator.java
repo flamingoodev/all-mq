@@ -23,7 +23,7 @@ public class KafkaConnectionCreator implements ConnectionCreator {
 
     @Override
     public Connection create() {
-        Asserts.notNull(configuration, "configuration is not set");
+        Asserts.notNull(configuration, "Configuration is not set");
         return new KafkaConnection(this.configuration);
     }
 }

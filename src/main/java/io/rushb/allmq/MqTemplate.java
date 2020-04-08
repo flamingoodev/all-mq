@@ -26,8 +26,8 @@ public class MqTemplate {
      * @param message message
      */
     public static void send(String topic, Message message) {
-        Asserts.notNull(topic, "topic can not be null");
-        Asserts.notNull(message, "message can not be null");
+        Asserts.notNull(topic, "Topic can not be null");
+        Asserts.notNull(message, "Message can not be null");
         Connection connection = ConnectionFactory.getInstance().getConnection();
         Producer producer = connection.createProducer(topic);
         producer.sendMessage(message);

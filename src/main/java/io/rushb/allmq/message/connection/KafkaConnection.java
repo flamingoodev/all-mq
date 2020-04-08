@@ -33,7 +33,7 @@ public class KafkaConnection implements Connection {
     private void validConfiguration(Configuration configuration) {
         Object s = configuration.get(AUTO_COMMIT_KEY);
         if (s != null && !Boolean.toString(true).equals(s)) {
-            logger.warn("the " + AUTO_COMMIT_KEY + " is not enable,this where set auto commit offset");
+            logger.warn("The " + AUTO_COMMIT_KEY + " is not enable,this where set auto commit offset");
             configuration.add(AUTO_COMMIT_KEY, "true");
         }
     }
@@ -41,7 +41,7 @@ public class KafkaConnection implements Connection {
 
     @Override
     public Consumer createConsumer(String topic) {
-        Asserts.notNull(configuration, "configuration is not set");
+        Asserts.notNull(configuration, "Configuration is not set");
         return new KafkaConsumer(configuration, topic);
     }
 

@@ -29,7 +29,7 @@ public class ConnectionFactory {
     }
 
     private ConnectionFactory(Configuration config) {
-        Asserts.notNull(config, "configuration not be null , you should call [ConnectionFactory.build()] first");
+        Asserts.notNull(config, "Configuration not be null , you should call ConnectionFactory.build() first");
         Object omq = config.get(MQ_NAME);
         Asserts.notNull(omq, "mq can not be null");
         String mq = String.valueOf(omq);
@@ -38,7 +38,7 @@ public class ConnectionFactory {
         } else if (Constant.ACTIVE_MQ.equalsIgnoreCase(mq)) {
             this.mq = MQ.ACTIVEMQ;
         } else {
-            throw new NotSupportParamException("the mq config can not be " + mq);
+            throw new NotSupportParamException("The mq config can not be " + mq);
         }
         configuration = config;
         new ConnectionFactory();

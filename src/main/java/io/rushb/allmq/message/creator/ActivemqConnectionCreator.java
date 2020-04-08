@@ -1,10 +1,10 @@
 package io.rushb.allmq.message.creator;
 
 
-import io.rushb.allmq.message.message.Configuration;
 import io.rushb.allmq.exception.CreateConnectionFailException;
 import io.rushb.allmq.message.connection.ActivemqConnection;
 import io.rushb.allmq.message.connection.Connection;
+import io.rushb.allmq.message.message.Configuration;
 import io.rushb.allmq.util.Asserts;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
@@ -34,15 +34,15 @@ public class ActivemqConnectionCreator implements ConnectionCreator {
 
     private void resolveConfig(Configuration configuration) {
         Object username = configuration.get("username");
-        Asserts.notNull(username, "username is not set");
+        Asserts.notNull(username, "Username is not set");
         this.username = username.toString();
 
         Object password = configuration.get("password");
-        Asserts.notNull(password, "password is not set");
+        Asserts.notNull(password, "Password is not set");
         this.password = password.toString();
 
         Object brokerUrl = configuration.get("brokerURL");
-        Asserts.notNull(brokerUrl, "brokerUrl is not set");
+        Asserts.notNull(brokerUrl, "Broker url is not set");
         this.brokerUrl = brokerUrl.toString();
     }
 
@@ -54,7 +54,7 @@ public class ActivemqConnectionCreator implements ConnectionCreator {
             connection.start();
             return new ActivemqConnection(configuration, connection);
         } catch (JMSException e) {
-            throw new CreateConnectionFailException("create activemq connection fail : " + e.getMessage(), e);
+            throw new CreateConnectionFailException("Create activemq connection fail : " + e.getMessage(), e);
         }
     }
 }
