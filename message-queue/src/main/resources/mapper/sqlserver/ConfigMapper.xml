@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="messagequeue.modules.config.dao.ConfigDao">
+    <select id="queryByCode" resultType="messagequeue.modules.config.entity.ConfigEntity">
+        SELECT connection_id,
+               connection_code,
+               connection_name,
+               protocol,
+               domain,
+               port,
+               arguments1,
+               arguments2,
+               arguments3,
+               arguments4,
+               arguments5,
+               username,
+               password,
+               remark,
+               user_item1,
+               user_item2,
+               user_item3,
+               user_item4,
+               user_item5,
+               update_user,
+               update_time
+        FROM sys_connection_config
+        WHERE connection_code = #{code}
+    </select>
+</mapper>
