@@ -31,11 +31,11 @@ public class ActivemqMessageListener implements MessageListener {
             try {
                 messageListener.onMessage(new messagequeue.message.message.Message(textMessage.getText()));
             } catch (JMSException e) {
-                logger.error("get message error");
+                logger.error("Get message error");
                 e.printStackTrace();
             }
         } else {
-            logger.error("not support message type : " + message.getClass().getName());
+            logger.error("Not support message type : " + message.getClass().getName());
         }
     }
 }

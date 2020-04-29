@@ -54,7 +54,7 @@ public class ActivemqConnection implements Connection {
             } else if (Boolean.toString(false).equals(transactionName)) {
                 transaction = false;
             } else {
-                throw new NotSupportParamException("the value of " + TRANSACTION_NAME + " can not be " + transactionName);
+                throw new NotSupportParamException("The value of " + TRANSACTION_NAME + " can not be " + transactionName);
             }
         }
         // auto mode
@@ -65,7 +65,7 @@ public class ActivemqConnection implements Connection {
             try {
                 mode = Integer.parseInt(String.valueOf(o));
             } catch (NumberFormatException e) {
-                throw new NumberFormatException("the " + AC_KNOWLEDGE_MODE_NAME + " config just only support number");
+                throw new NumberFormatException("The " + AC_KNOWLEDGE_MODE_NAME + " config just only support number");
             }
         } else {
             mode = 1;
@@ -75,7 +75,7 @@ public class ActivemqConnection implements Connection {
         if (to != null) {
             this.type = Integer.parseInt(String.valueOf(to));
             if (this.type != 0 && this.type != 1) {
-                throw new NotSupportParamException("the value of " + TYPE_NAME + " can not be " + to);
+                throw new NotSupportParamException("The value of " + TYPE_NAME + " can not be " + to);
             }
         } else {
             this.type = 0;
@@ -83,7 +83,7 @@ public class ActivemqConnection implements Connection {
         try {
             this.session = this.connection.createSession(transaction, mode);
         } catch (JMSException e) {
-            throw new CreateConnectionFailException("create session fail", e);
+            throw new CreateConnectionFailException("Create session fail", e);
         }
     }
 
@@ -94,7 +94,7 @@ public class ActivemqConnection implements Connection {
             MessageConsumer consumer = session.createConsumer(destination);
             return new ActivemqConsumer(consumer);
         } catch (JMSException e) {
-            throw new CreateConnectionFailException("create activemq consumer fail", e);
+            throw new CreateConnectionFailException("Create ActiveMQ consumer fail", e);
         }
     }
 
@@ -105,7 +105,7 @@ public class ActivemqConnection implements Connection {
             MessageProducer producer = session.createProducer(destination);
             return new ActivemqProducer(producer, session);
         } catch (JMSException e) {
-            throw new CreateConnectionFailException("create activemq producer fail", e);
+            throw new CreateConnectionFailException("Create ActiveMQ producer fail", e);
         }
     }
 

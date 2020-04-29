@@ -26,14 +26,14 @@ public class KafkaProducer implements Producer {
     protected String topic;
 
     public KafkaProducer(MqConfiguration configuration) {
-        Asserts.notNull(configuration, "configuration can not be null");
+        Asserts.notNull(configuration, "Configuration can not be null");
         this.configuration = configuration;
         init();
     }
 
     public KafkaProducer(MqConfiguration configuration, String topic) {
         this(configuration);
-        Asserts.notNull(topic, "topic can not be null");
+        Asserts.notNull(topic, "Topic can not be null");
         this.topic = topic;
     }
 
@@ -52,7 +52,7 @@ public class KafkaProducer implements Producer {
      * @param message send data
      */
     public void sendMessage(String topic, Message message) {
-        Asserts.notNull(message, "message not be null");
+        Asserts.notNull(message, "Message not be null");
         if (message instanceof KeyValueMessage) {
             KeyValueMessage keyValueData = (KeyValueMessage) message;
             producer.send(new ProducerRecord<String, String>(topic, keyValueData.getKey(), keyValueData.getData()));

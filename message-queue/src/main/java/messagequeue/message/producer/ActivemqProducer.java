@@ -36,7 +36,7 @@ public class ActivemqProducer implements Producer {
             TextMessage textMessage = session.createTextMessage(message.getData());
             producer.send(textMessage);
         } catch (JMSException e) {
-            logger.error("send activemq message fail , " + e.getMessage());
+            logger.error("Send activemq message fail , " + e.getMessage());
         }
     }
 

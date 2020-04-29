@@ -19,9 +19,9 @@ public class SqlServerDataSourceConfig {
     public DataSource dataSource() {
         DruidDataSource druidDataSource = new DruidDataSource();
         druidDataSource.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        druidDataSource.setUrl("jdbc:sqlserver://localhost:1433;DatabaseName=sso_master");
+        druidDataSource.setUrl("jdbc:sqlserver://localhost:1433;DatabaseName=all_mq");
         druidDataSource.setUsername("sa");
-        druidDataSource.setPassword("oneplus@2018");
+        druidDataSource.setPassword("sa");
         return druidDataSource;
     }
 

@@ -11,7 +11,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>one-common</groupId>
+    <groupId>io.rushb</groupId>
     <artifactId>message-queue</artifactId>
     <version>1.0.0</version>
     <name>message-queue</name>

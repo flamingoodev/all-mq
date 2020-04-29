@@ -43,7 +43,7 @@
         </dependency>
 
         <dependency>
-            <groupId>one-common</groupId>
+            <groupId>io.rushb</groupId>
             <artifactId>message-queue</artifactId>
             <version>1.0.0</version>
         </dependency>

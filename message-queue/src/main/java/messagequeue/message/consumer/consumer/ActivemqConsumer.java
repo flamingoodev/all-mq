@@ -30,7 +30,7 @@ public class ActivemqConsumer implements Consumer {
         try {
             this.consumer.setMessageListener(new ActivemqMessageListener(messageListener));
         } catch (JMSException e) {
-            logger.error("set message listener fail", e);
+            logger.error("Set message listener fail", e);
         }
     }
 

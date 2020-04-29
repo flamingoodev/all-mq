@@ -21,7 +21,7 @@ public class MySqlDataSourceConfig {
     public DataSource dataSource() {
         DruidDataSource druidDataSource = new DruidDataSource();
         druidDataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        druidDataSource.setUrl("jdbc:mysql://localhost:3306/sso_master?allowMultiQueries=true&serverTimezone=GMT%2B8&characterEncoding=UTF-8");
+        druidDataSource.setUrl("jdbc:mysql://localhost:3306/all_mq?allowMultiQueries=true&serverTimezone=GMT%2B8&characterEncoding=UTF-8");
         druidDataSource.setUsername("root");
         druidDataSource.setPassword("root");
         return druidDataSource;
